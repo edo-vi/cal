@@ -6,7 +6,7 @@ Simple CLI app that prints the current class schedule, taken from the Univr/orar
 ### Installation
 //TODO
 
-###Usage
+### Usage
 To get the current week schedule just run
 ```
 cal 
