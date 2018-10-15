@@ -1,7 +1,6 @@
-public interface UrlBuilder {
-    String[] urlSlices;
-}
+
 private class Builder {
+    private String[] urlSlices;
     private String[] args;
 
 }
