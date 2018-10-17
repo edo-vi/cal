@@ -17,7 +17,7 @@ public class Tuple<T,W> {
     public static Tuple<String, String> fromString(String s, int length, char separator) {
         String one = "";
         String two = "";
-        int i = s.indexOf(separator);;
+        int i = s.indexOf(separator);
         if (i<0) {
             throw new Error("No separator");
         }
