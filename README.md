@@ -13,14 +13,14 @@ cal
 ``` 
 This is the same as 
 ```
-cal --week=current
+cal -week=current
 ```
 To print a different week, just specify the date range (Monday-Sunday, format DD/MM-DD/MM), like so
 ```
-cal --week=19/11-26/11
+cal -week=19/11-26/11
 ```
 
 or just 
 ```
-cal --week=19/11
+cal -week=19/11
 ```
