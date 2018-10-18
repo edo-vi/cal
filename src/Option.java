@@ -20,6 +20,13 @@ public class Option {
 
     }
     /*
+     * With no separator
+     */
+    Option(String s) {
+        this(s,'=');
+    }
+
+    /*
      * Constructor from two strings
      */
     Option(String one, String two) {
