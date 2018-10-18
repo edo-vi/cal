@@ -1,11 +1,11 @@
 public class Options {
 
-    Tuple<String, String> entry;
+    private Tuple<String, String> entry;
 
     /*
      * Constructor from a string, with a specified separator 
      */
-    Options(String s, int length, char separator) {
+    Options(String s, char separator) {
         String one = "";
         String two = "";
         int i = s.indexOf(separator);
@@ -14,9 +14,7 @@ public class Options {
         }
 
         one+=s.substring(0,i);
-        if (i<length-1) {
-            two+=s.substring(i+1,length);
-        }
+        two=s.substring(i+1);
 
         this.entry = new Tuple<>(one, two);
 

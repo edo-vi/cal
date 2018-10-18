@@ -1,5 +1,7 @@
 public class MyMain {
     public static void main(String[] args) {
-        System.out.println(new Options("anno=2", 6,'='));
+        for (String arg : args) {
+            System.out.println(new Options(arg, '='));
+        }
     }
 }
