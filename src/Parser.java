@@ -1,6 +1,4 @@
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.TimeZone;
 
 public class Parser {
     private final Option[] base = new Option[] {
@@ -29,7 +27,6 @@ public class Parser {
         for (String s : args) {
             baseArgs.add(new Option(s));
         }
-
 
         // add current week as default
     }
