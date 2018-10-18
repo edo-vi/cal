@@ -1,11 +1,11 @@
-public class Options {
+public class Option {
 
     private Tuple<String, String> entry;
 
     /*
      * Constructor from a string, with a specified separator 
      */
-    Options(String s, char separator) {
+    Option(String s, char separator) {
         String one = "";
         String two = "";
         int i = s.indexOf(separator);
@@ -22,7 +22,7 @@ public class Options {
     /*
      * Constructor from two strings
      */
-    Options(String one, String two) {
+    Option(String one, String two) {
         this.entry = new Tuple<>(one, two);
     }
 
