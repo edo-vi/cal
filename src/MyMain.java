@@ -1,5 +1,7 @@
 public class MyMain {
     public static void main(String[] args) {
-        System.out.println(Tuple.fromString("anno=", 5,'='));
+        for (String arg : args) {
+            System.out.println(new Option(arg, '='));
+        }
     }
 }
