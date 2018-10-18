@@ -20,7 +20,7 @@ public class Option {
 
     }
     /*
-     * With no separator
+     * With no separator (default is '=')
      */
     Option(String s) {
         this(s,'=');
@@ -33,12 +33,20 @@ public class Option {
         this.entry = new Tuple<>(one, two);
     }
 
-    public String option() {
+    public String key() {
         return this.entry.fst();
     }
 
     public String value() {
         return this.entry.snd();
+    }
+
+    public boolean isKey(String s) {
+        return this.key().equals(s);
+    }
+
+    public boolean isValue(String s) {
+        return this.value().equals(s);
     }
 
     public String toString() {
