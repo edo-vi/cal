@@ -10,7 +10,7 @@ public class Tuple<T,W> {
     public T fst() {
         return this.first;
     }
-    public W second() {
+    public W snd() {
         return this.second;
     }
 
