@@ -3,5 +3,6 @@ public class MyMain {
         for (String arg : args) {
             System.out.println(new Option(arg, '='));
         }
+        Parser par = new Parser(args);
     }
 }
