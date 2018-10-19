@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class Parser {
@@ -39,28 +40,31 @@ public class Parser {
     private ArrayList<HttpGetQuery> getDefaults(ArrayList<Option> args) {
         ArrayList<HttpGetQuery> list = new ArrayList<>();
         // keys in args
-        ArrayList<String> keys = new ArrayList<>(args.stream().map(Option::key).collect(Collectors.toCollection(ArrayList::new)));
+        HashMap<String, String> arguments = new HashMap<>();
 
-        if (!keys.contains("date")) {
+        for (Option arg : args) {
+            arguments.put(arg.key(), arg.value());
+        }
+        if (!arguments.keySet().contains("date")) {
             list.add(new HttpGetQuery("date", "22/10/2018")); //todo add function to extrapolate date from current weeek
         } else {
-            //elaborate date
+            list.add(handleDate(arguments.get("date")));
         }
-        if (!keys.contains("corso")) {
+        if (!arguments.keySet().contains("corso")) {
             list.add(new HttpGetQuery("corso","420")); // default is informatica
         } else {
-            //elaborate corso
+            list.add(handleCourse(arguments.get("corso")));
         }
-        if (!keys.contains("anno")) {
+        /*if (!arguments.keySet().contains("anno")) {
             list.add(new HttpGetQuery("anno", "2018")); // todo also add function
         } else {
-            // elaborate anno
-        }
-        if (!keys.contains("anno")) {
-            list.add(new HttpGetQuery("anno2","999%7C2"));
+            list.add(handleArgument(arguments.get("anno")));
+        }*/
+        if (!arguments.keySet().contains("anno")) {
+            list.add(new HttpGetQuery("anno2","999%7C2")); // second year
             list.add(new HttpGetQuery("anno2_multi","999%7C2"));
         } else {
-            //elaborate anno2
+            list.add(handleYear(arguments.get("date")));
         }
         return list;
     }
@@ -68,6 +72,19 @@ public class Parser {
     public ArrayList<HttpGetQuery> getQueries() {
         return this.getQueries;
     }
+
+    private HttpGetQuery handleDate(String date) {
+
+    }
+
+    private HttpGetQuery handleCourse(String date) {
+
+    }
+
+    private HttpGetQuery handleYear(String date) {
+
+    }
+
 }
 
 final class HttpGetQuery extends Tuple<String,String> {
