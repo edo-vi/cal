@@ -77,12 +77,26 @@ public class Parser {
 
     }
 
-    private HttpGetQuery handleCourse(String date) {
-
+    private HttpGetQuery handleCourse(String course) {
+        switch (course) {
+            case "informatica":
+                return new HttpGetQuery("corso","420");
+            default:
+                throw new Error("Wrong course");
+        }
     }
 
-    private HttpGetQuery handleYear(String date) {
-
+    private HttpGetQuery handleYear(String year) {
+        switch(year) {
+            case "1":
+                return new HttpGetQuery("anno2", "999%7C1");
+            case "2":
+                return new HttpGetQuery("anno2", "999%7C2");
+            case "3":
+                return new HttpGetQuery("anno2", "999%7C1");
+            default:
+                throw new Error ("Year option must be between 1 and 3");
+        }
     }
 
 }
