@@ -74,7 +74,14 @@ public class Parser {
     }
 
     private HttpGetQuery handleDate(String date) {
-
+        //check correct format of date (aa/bb/cccc),
+        if (date.length() != 10 || !(isNumeric(date.charAt(0)) && isNumeric(date.charAt(1))
+            && isNumeric(date.charAt(3)) && isNumeric(date.charAt(4)) && isNumeric(date.charAt(6))
+            && isNumeric(date.charAt(7)) && isNumeric(date.charAt(8)) && isNumeric(date.charAt(9))
+        ) || (date.charAt(2) != '/' || date.charAt(5) != '/')) {
+            throw new Error("Wrong date format. Use dd/mm/yyyy");
+        }
+        return new HttpGetQuery("what","ever");
     }
 
     private HttpGetQuery handleCourse(String course) {
@@ -93,10 +100,14 @@ public class Parser {
             case "2":
                 return new HttpGetQuery("anno2", "999%7C2");
             case "3":
-                return new HttpGetQuery("anno2", "999%7C1");
+                return new HttpGetQuery("anno2", "999%7C3");
             default:
                 throw new Error ("Year option must be between 1 and 3");
         }
+    }
+
+    private static boolean isNumeric(char a) {
+        return (int) a >= '0' && (int) a <= '9';
     }
 
 }

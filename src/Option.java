@@ -6,6 +6,9 @@ public class Option {
      * Constructor from a string, with a specified separator 
      */
     Option(String s, char separator) {
+        if(s.charAt(0) != '-') {
+            throw new Error("Option format wrong, should be '-option=value");
+        }
         String one = "";
         String two = "";
         int i = s.indexOf(separator);
@@ -13,7 +16,7 @@ public class Option {
             throw new Error("No separator");
         }
 
-        one+=s.substring(0,i);
+        one+=s.substring(1,i);
         two=s.substring(i+1);
 
         this.entry = new Tuple<>(one, two);
