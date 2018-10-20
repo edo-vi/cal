@@ -4,10 +4,6 @@ public class MyMain {
             System.out.println(new Option(arg, '='));
         }
         Parser par = new Parser(args);
+        Downloader down = new Downloader(par.getQueries());
     }
-
-    private static boolean isNumeric(char a) {
-        return (int) a >= '0' && (int) a <= '9';
-    }
-
 }

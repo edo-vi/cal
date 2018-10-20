@@ -1,23 +1,20 @@
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public class Parser {
     private static final HttpGetQuery[] base = new HttpGetQuery[] {
             new HttpGetQuery("form-type","corso"),
             new HttpGetQuery("list","0"),
-            new HttpGetQuery("anno","2018"),
             new HttpGetQuery("visualizzazione_orario","cal"),
-            //new HttpGetQuery("periodo_didattico",""),
+            /* tx- probably not required
             new HttpGetQuery("txtaa","2018/2019"), //periodo scolastico
             new HttpGetQuery("txtcorso","Laurea%20in%20informatica%20(Corsi%20di%20laurea)"),
             new HttpGetQuery("txtanno","2%20anno%20-%20Unico"),
-            //new HttpGetQuery("docente",""),
-            //new HttpGetQuery("attivita",""),
-            //new HttpGetQuery("txtdocente",""),
-            //new HttpGetQuery("txtattività","")
+            new HttpGetQuery("txtdocente",""),
+            new HttpGetQuery("txtattività",""), */
             new HttpGetQuery("_lang","it")
     };
 
@@ -46,25 +43,21 @@ public class Parser {
             arguments.put(arg.key(), arg.value());
         }
         if (!arguments.keySet().contains("date")) {
-            list.add(new HttpGetQuery("date", "22/10/2018")); //todo add function to extrapolate date from current weeek
+            list.add(new HttpGetQuery("date", "22/10/2018")); //todo add function to extrapolate date from current week
+            list.add(new HttpGetQuery("anno","2018"));
         } else {
-            list.add(handleDate(arguments.get("date")));
+            list.addAll(handleDate(arguments.get("date")));
         }
         if (!arguments.keySet().contains("corso")) {
             list.add(new HttpGetQuery("corso","420")); // default is informatica
         } else {
             list.add(handleCourse(arguments.get("corso")));
         }
-        /*if (!arguments.keySet().contains("anno")) {
-            list.add(new HttpGetQuery("anno", "2018")); // todo also add function
-        } else {
-            list.add(handleArgument(arguments.get("anno")));
-        }*/
         if (!arguments.keySet().contains("anno")) {
             list.add(new HttpGetQuery("anno2","999%7C2")); // second year
             list.add(new HttpGetQuery("anno2_multi","999%7C2"));
         } else {
-            list.add(handleYear(arguments.get("date")));
+            list.addAll(handleYear(arguments.get("anno")));
         }
         return list;
     }
@@ -73,15 +66,18 @@ public class Parser {
         return this.getQueries;
     }
 
-    private HttpGetQuery handleDate(String date) {
+    private ArrayList<HttpGetQuery> handleDate(String date) {
         //check correct format of date (aa/bb/cccc),
         if (date.length() != 10 || !(isNumeric(date.charAt(0)) && isNumeric(date.charAt(1))
             && isNumeric(date.charAt(3)) && isNumeric(date.charAt(4)) && isNumeric(date.charAt(6))
             && isNumeric(date.charAt(7)) && isNumeric(date.charAt(8)) && isNumeric(date.charAt(9))
-        ) || (date.charAt(2) != '/' || date.charAt(5) != '/')) {
+        ) || date.charAt(2) != '/' || date.charAt(5) != '/') {
             throw new Error("Wrong date format. Use dd/mm/yyyy");
+        } else {
+            String year = date.substring(6);
+            return new ArrayList<>(Arrays.asList(new HttpGetQuery("date", date), new HttpGetQuery("anno", year)));
+
         }
-        return new HttpGetQuery("what","ever");
     }
 
     private HttpGetQuery handleCourse(String course) {
@@ -89,18 +85,18 @@ public class Parser {
             case "informatica":
                 return new HttpGetQuery("corso","420");
             default:
-                throw new Error("Wrong course");
+                throw new Error("Course '" + course + "' non supported. Try something different.");
         }
     }
 
-    private HttpGetQuery handleYear(String year) {
+    private ArrayList<HttpGetQuery> handleYear(String year) {
         switch(year) {
             case "1":
-                return new HttpGetQuery("anno2", "999%7C1");
+                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C1"), new HttpGetQuery("anno2", "999%7C1")));
             case "2":
-                return new HttpGetQuery("anno2", "999%7C2");
+                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C2"), new HttpGetQuery("anno2", "999%7C2")));
             case "3":
-                return new HttpGetQuery("anno2", "999%7C3");
+                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C3"), new HttpGetQuery("anno2", "999%7C3")));
             default:
                 throw new Error ("Year option must be between 1 and 3");
         }
