@@ -5,4 +5,9 @@ public class MyMain {
         }
         Parser par = new Parser(args);
     }
+
+    private static boolean isNumeric(char a) {
+        return (int) a >= '0' && (int) a <= '9';
+    }
+
 }
