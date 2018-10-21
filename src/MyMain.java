@@ -4,6 +4,7 @@ public class MyMain {
             System.out.println(new Option(arg, '='));
         }
         Parser par = new Parser(args);
-        Downloader down = new Downloader(par.getQueries());
+        Downloader dwnldr = new Downloader(par.getQueries());
+
     }
 }
