@@ -92,11 +92,11 @@ public class Parser {
     private ArrayList<HttpGetQuery> handleYear(String year) {
         switch(year) {
             case "1":
-                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C1"), new HttpGetQuery("anno2", "999%7C1")));
+                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C1"), new HttpGetQuery("anno2_multi", "999%7C1")));
             case "2":
-                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C2"), new HttpGetQuery("anno2", "999%7C2")));
+                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C2"), new HttpGetQuery("anno2_multi", "999%7C2")));
             case "3":
-                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C3"), new HttpGetQuery("anno2", "999%7C3")));
+                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C3"), new HttpGetQuery("anno2_multiueries", "999%7C3")));
             default:
                 throw new Error ("Year option must be between 1 and 3");
         }
