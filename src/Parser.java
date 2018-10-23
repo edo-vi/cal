@@ -43,7 +43,7 @@ public class Parser {
             arguments.put(arg.key(), arg.value());
         }
         if (!arguments.keySet().contains("date")) {
-            list.add(new HttpGetQuery("date", "22/10/2018")); //todo add function to extrapolate date from current week
+            list.add(new HttpGetQuery("date", "220/10/2018")); //todo add function to extrapolate date from current week
             list.add(new HttpGetQuery("anno","2018"));
         } else {
             list.addAll(handleDate(arguments.get("date")));

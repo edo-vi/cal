@@ -4,6 +4,9 @@ public class MyMain {
             System.out.println(new Option(arg, '='));
         }
         Parser par = new Parser(args);
+        for (HttpGetQuery que  : par.getQueries()) {
+            System.out.println(que);
+        }
         Downloader dwnldr = new Downloader(par.getQueries());
 
     }
