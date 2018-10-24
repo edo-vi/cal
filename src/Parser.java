@@ -2,6 +2,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Parser {
@@ -43,8 +44,7 @@ public class Parser {
             arguments.put(arg.key(), arg.value());
         }
         if (!arguments.keySet().contains("date")) {
-            list.add(new HttpGetQuery("date", "22/10/2018")); //todo add function to extrapolate date from current week
-            list.add(new HttpGetQuery("anno","2018"));
+            list.addAll(getCurrentWeek());
         } else {
             list.addAll(handleDate(arguments.get("date")));
         }
@@ -92,11 +92,11 @@ public class Parser {
     private ArrayList<HttpGetQuery> handleYear(String year) {
         switch(year) {
             case "1":
-                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C1"), new HttpGetQuery("anno2", "999%7C1")));
+                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C1"), new HttpGetQuery("anno2_multi", "999%7C1")));
             case "2":
-                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C2"), new HttpGetQuery("anno2", "999%7C2")));
+                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C2"), new HttpGetQuery("anno2_multi", "999%7C2")));
             case "3":
-                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C3"), new HttpGetQuery("anno2", "999%7C3")));
+                return new ArrayList<>(Arrays.asList(new HttpGetQuery("anno2", "999%7C3"), new HttpGetQuery("anno2_multiueries", "999%7C3")));
             default:
                 throw new Error ("Year option must be between 1 and 3");
         }
@@ -106,6 +106,10 @@ public class Parser {
         return (int) a >= '0' && (int) a <= '9';
     }
 
+    private ArrayList<HttpGetQuery> getCurrentWeek() {
+        Date date = new Date();
+        return new ArrayList<>(Arrays.asList(new HttpGetQuery[]{}));
+    }
 }
 
 final class HttpGetQuery extends Tuple<String,String> {
