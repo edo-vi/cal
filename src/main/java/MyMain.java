@@ -1,5 +1,7 @@
+import java.net.MalformedURLException;
+
 public class MyMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         for (String arg : args) {
             System.out.println(new Option(arg, '='));
         }
@@ -8,7 +10,12 @@ public class MyMain {
         for (HttpGetQuery que  : par.getQueries()) {
             System.out.println(que);
         }
-        Downloader dwnldr = new Downloader(par.getQueries());
+        try {
+            Downloader dwnldr = new Downloader(par.getQueries());
+        } catch (MalformedURLException e) {
+            System.out.println("error: " + e);
+        }
+
 
     }
 }
