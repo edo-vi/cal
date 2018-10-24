@@ -4,4 +4,6 @@ public class Day {
     private String name;
     private Date date;
     private Class[] classes;
+
+
 }

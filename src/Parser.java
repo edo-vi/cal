@@ -1,9 +1,9 @@
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.spi.CalendarDataProvider;
 
 public class Parser {
     private static final HttpGetQuery[] base = new HttpGetQuery[] {
@@ -107,8 +107,20 @@ public class Parser {
     }
 
     private ArrayList<HttpGetQuery> getCurrentWeek() {
-        Date date = new Date();
-        return new ArrayList<>(Arrays.asList(new HttpGetQuery[]{}));
+        Calendar cal = Calendar.getInstance();
+        // set date to today
+        cal.setTime(new Date());
+        //set date to last monday
+        while (cal.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
+            cal.add(Calendar.DATE, -1);
+        }
+        int year = cal.get(Calendar.YEAR);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String resu = dateFormat.format(cal.getTime());
+        return new ArrayList<>(Arrays.asList(new HttpGetQuery[]{
+                new HttpGetQuery("anno",String.valueOf(year)),
+                new HttpGetQuery("date", resu)
+        }));
     }
 }
 

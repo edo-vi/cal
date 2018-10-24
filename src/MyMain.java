@@ -4,6 +4,7 @@ public class MyMain {
             System.out.println(new Option(arg, '='));
         }
         Parser par = new Parser(args);
+        //todo remove
         for (HttpGetQuery que  : par.getQueries()) {
             System.out.println(que);
         }
