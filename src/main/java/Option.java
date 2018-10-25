@@ -19,7 +19,7 @@ public class Option {
         one+=s.substring(1,i);
         two=s.substring(i+1);
 
-        this.entry = new Tuple<>(one, two);
+        this.entry = new Tuple<String, String>(one, two);
 
     }
     /*
@@ -33,7 +33,7 @@ public class Option {
      * Constructor from two strings
      */
     Option(String one, String two) {
-        this.entry = new Tuple<>(one, two);
+        this.entry = new Tuple<String, String>(one, two);
     }
 
     public String key() {
