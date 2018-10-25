@@ -1,4 +1,5 @@
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -7,14 +8,16 @@ public class Parser {
     private static final HttpGetQuery[] base = new HttpGetQuery[] {
             new HttpGetQuery("form-type","corso"),
             new HttpGetQuery("list","0"),
+            new HttpGetQuery("periodo_didattico",""),
             new HttpGetQuery("visualizzazione_orario","cal"),
-            /* tx- probably not required
             new HttpGetQuery("txtaa","2018/2019"), //periodo scolastico
-            new HttpGetQuery("txtcorso","Laurea%20in%20informatica%20(Corsi%20di%20laurea)"),
-            new HttpGetQuery("txtanno","2%20anno%20-%20Unico"),
+            new HttpGetQuery("txtcorso","Laurea in informatica (Corsi di laurea)"),
+            new HttpGetQuery("txtanno","2 anno - Unico"),
             new HttpGetQuery("txtdocente",""),
-            new HttpGetQuery("txtattività",""), */
-            new HttpGetQuery("_lang","it")
+            new HttpGetQuery("txtattivita",""),
+            new HttpGetQuery("_lang","it"),
+            new HttpGetQuery("docente",""),
+            new HttpGetQuery("attivita",""),
     };
 
     private ArrayList<HttpGetQuery> getQueries;
@@ -48,8 +51,10 @@ public class Parser {
         }
         if (!arguments.keySet().contains("corso")) {
             list.add(new HttpGetQuery("corso","420")); // default is informatica
+            list.add(new HttpGetQuery("ar_codes_","EC123053|EC123042|EC124717|EC124716|EC123048|EC124720"));
+            list.add(new HttpGetQuery("ar_select_","true|true|true|true|true|true"));
         } else {
-            list.add(handleCourse(arguments.get("corso")));
+            list.addAll(handleCourse(arguments.get("corso")));
         }
         if (!arguments.keySet().contains("anno")) {
             list.add(new HttpGetQuery("anno2","999%7C2")); // second year
@@ -69,7 +74,7 @@ public class Parser {
         if (date.length() != 10 || !(isNumeric(date.charAt(0)) && isNumeric(date.charAt(1))
             && isNumeric(date.charAt(3)) && isNumeric(date.charAt(4)) && isNumeric(date.charAt(6))
             && isNumeric(date.charAt(7)) && isNumeric(date.charAt(8)) && isNumeric(date.charAt(9))
-        ) || date.charAt(2) != '/' || date.charAt(5) != '/') {
+        ) || date.charAt(2) != '-' || date.charAt(5) != '-') {
             throw new Error("Wrong date format. Use dd/mm/yyyy");
         } else {
             String year = date.substring(6);
@@ -78,10 +83,14 @@ public class Parser {
         }
     }
 
-    private HttpGetQuery handleCourse(String course) {
+    private ArrayList<HttpGetQuery> handleCourse(String course) {
         switch (course) {
             case "informatica":
-                return new HttpGetQuery("corso","420");
+                return new ArrayList<HttpGetQuery>(Arrays.asList(
+                        new HttpGetQuery("corso","420"),
+                        new HttpGetQuery("ar_codes_","EC123053|EC123042|EC124717|EC124716|EC123048|EC124720"),
+                        new HttpGetQuery("ar_select_","true|true|true|true|true|true")));
+
             default:
                 throw new Error("Course '" + course + "' non supported. Try something different.");
         }
@@ -113,12 +122,12 @@ public class Parser {
             cal.add(Calendar.DATE, -1);
         }
         int year = cal.get(Calendar.YEAR);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String resu = dateFormat.format(cal.getTime());
-        return new ArrayList<HttpGetQuery>(Arrays.asList(new HttpGetQuery[]{
+        return new ArrayList<HttpGetQuery>(Arrays.asList(
                 new HttpGetQuery("anno",String.valueOf(year)),
                 new HttpGetQuery("date", resu)
-        }));
+        ));
     }
 }
 
