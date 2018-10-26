@@ -45,8 +45,7 @@ public class Downloader {
             s.contains("]") || s.contains("%") || s.contains(";") ||
             s.contains("=") || s.contains("&")) || s.contains("?") {
             throw new Error("malformed URL: invalid char");
-        } else {
-            return s;
         }
+        return s;
     }
 }
