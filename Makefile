@@ -1,6 +1,5 @@
-all: calunivr.sh
-	@chmod +x calunivr.sh
-	@mv ./calunivr.sh /usr/local/bin/calunivr
-	@mv ./calunivr.jar /usr/local/bin/calunivr.jar
+all: install.sh
+	@chmod +x install.sh
+	@./install.sh
 	@echo "Ok 👍"
-	@echo "Usa 'calunivr' per invocare il programma. "
+	@echo "Esci dalla shell e poi usa 'calunivr' per invocare il programma. "
