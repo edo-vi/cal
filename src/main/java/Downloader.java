@@ -43,10 +43,9 @@ public class Downloader {
     private String urlSanitize(String s) throws Error {
         if (s.contains("{") || s.contains("}") || s.contains("[") ||
             s.contains("]") || s.contains("%") || s.contains(";") ||
-            s.contains("=") || s.contains("&")){
+            s.contains("=") || s.contains("&")) || s.contains("?") {
             throw new Error("malformed URL: invalid char");
-        } else {
-            return s;
         }
+        return s;
     }
 }
