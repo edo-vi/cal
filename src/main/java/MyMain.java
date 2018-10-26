@@ -1,6 +1,7 @@
 import biweekly.component.VEvent;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 //mvn clean compile assembly:single
 public class MyMain {
@@ -8,12 +9,10 @@ public class MyMain {
         Parser par = new Parser(args);
         try {
             Downloader dwnldr = new Downloader(par.getQueries());
-            for (VEvent ve: dwnldr.getEvents()) {
-                System.out.println(ve.getSummary().getValue());
-                System.out.println(ve.getDateStart().getValue());
-                System.out.println(ve.getDateEnd().getValue());
-                System.out.println();
-            }
+            IcalParser parser = new IcalParser(dwnldr.getEvents());
+            ArrayList<Day> days = parser.getList();
+            Record r = new Record(days);
+            r.print();
         } catch (MalformedURLException e) {
             System.out.println("Error: " + e);
         }

@@ -1,13 +1,56 @@
-import java.time.LocalTime;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Class {
     private String name;
-    private LocalTime start;
-    private LocalTime end;
+    private Date start;
+    private Date end;
 
-    Class(String namev, LocalTime time1, LocalTime time2) {
-        name=namev;
-        start=time1;
-        end=time2;
+    Class(String namev, Date time1, Date time2) {
+        setName(namev);
+        setStart(time1);
+        setEnd(time2);
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public String getStartTime() {
+        Date sta = this.getStart();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(sta);
+        return String.valueOf(cal.get(Calendar.HOUR_OF_DAY))+ ":" + String.valueOf(cal.get(Calendar.MINUTE));
+    }
+
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public String getEndTime() {
+        Date end = this.getEnd();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(end);
+        return String.valueOf(cal.get(Calendar.HOUR_OF_DAY))+ ":" + String.valueOf(cal.get(Calendar.MINUTE));
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
     }
 }
