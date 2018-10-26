@@ -26,7 +26,7 @@ public class Class {
         } else if (name.equals("Sistemi operativi teoria")) {
             return "Sistemi operativi";
         }
-        return name;
+        return name.substring(0,21);
     }
 
     public void setName(String name) {
