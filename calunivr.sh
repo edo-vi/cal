@@ -1,1 +1,4 @@
-java -jar calunivr.jar "$@"
+#!/bin/bash
+scriptdir="$(dirname "$0")"
+cd "$scriptdir"
+java -jar ./calunivr.jar "$@"
