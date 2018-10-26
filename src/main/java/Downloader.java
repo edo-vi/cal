@@ -12,22 +12,23 @@ import java.util.List;
 
 public class Downloader {
     private static String host = "logistica.univr.it/aule/Orario/ec_download_ical_grid.php";
-
+    private final List<VEvent> events;
 
     Downloader(ArrayList<HttpGetQuery> arr) throws Exception {
         URL url = buildURL(arr);
-        InputStream stream = url.openStream();
         try {
+            InputStream stream = url.openStream();
             ICalendar cal = Biweekly.parse(stream).first();
-            List<VEvent> events = cal.getEvents();
+            events = cal.getEvents();
             stream.close();
-            for( VEvent ev : events) {
-                System.out.println(ev.getDateStart().getValue().getRawComponents().getMonth());
-            }
         } catch(Exception e) {
             throw new Error();
         }
 
+    }
+
+    public List<VEvent> getEvents() {
+        return this.events;
     }
 
     private URL buildURL(ArrayList<HttpGetQuery> arr) throws MalformedURLException {
@@ -43,7 +44,7 @@ public class Downloader {
         if (s.contains("{") || s.contains("}") || s.contains("[") ||
             s.contains("]") || s.contains("%") || s.contains(";") ||
             s.contains("=") || s.contains("&")){
-            throw new Error("malformed URL");
+            throw new Error("malformed URL: invalid char");
         } else {
             return s;
         }
