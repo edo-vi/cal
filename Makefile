@@ -1,5 +1,5 @@
 all: calunivr.sh
-	@chmod +x calunivr
-	@mv ./calunivr /usr/local/bin/calunivr
-	@mv calunivr.jar /usr/local/bin/calunivr.jar
-	@echo "Ok. Usa 'caluni' per invocare il programma. "
+	@chmod +x calunivr.sh
+	@mv ./calunivr.sh /usr/local/bin/calunivr
+	@mv ./calunivr.jar /usr/local/bin/calunivr.jar
+	@echo "Ok. Usa 'calunivr' per invocare il programma. "
