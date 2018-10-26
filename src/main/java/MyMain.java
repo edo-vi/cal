@@ -2,10 +2,10 @@ import biweekly.component.VEvent;
 
 import java.net.MalformedURLException;
 
+//mvn clean compile assembly:single
 public class MyMain {
     public static void main(String[] args) throws Exception {
         Parser par = new Parser(args);
-        //todo remove
         try {
             Downloader dwnldr = new Downloader(par.getQueries());
             for (VEvent ve: dwnldr.getEvents()) {
