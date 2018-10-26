@@ -19,6 +19,16 @@ public class Class {
         return name;
     }
 
+    public String getCustomName() {
+        String name = this.getName();
+        if (name.length()>20 && name.substring(0,17).equals("Programmazione ii")) {
+            return "Programmazione II";
+        } else if (name.equals("Sistemi operativi teoria")) {
+            return "Sistemi operativi";
+        }
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

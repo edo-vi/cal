@@ -13,7 +13,7 @@ public class Record {
             MyDate date = d.getDate();
             init += date.getDayofweek()+" " + date.getDay()+"/"+date.getMonth() + "\n";
             for (Class c : d.getClasses()) {
-                init += c.getName() + " " + c.getStartTime() + " - " + c.getEndTime() + "\n";
+                init += c.getCustomName() + " " + c.getStartTime() + " - " + c.getEndTime() + "\n";
             }
             init+="\n";
         }
