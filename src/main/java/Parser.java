@@ -65,7 +65,7 @@ public class Parser {
             && isNumeric(date.charAt(3)) && isNumeric(date.charAt(4)) && isNumeric(date.charAt(6))
             && isNumeric(date.charAt(7)) && isNumeric(date.charAt(8)) && isNumeric(date.charAt(9))
         ) || date.charAt(2) != '-' || date.charAt(5) != '-') {
-            throw new Error("Wrong date format. Use dd/mm/yyyy");
+            throw new Error("Wrong date format. Use dd-mm-yyyy");
         } else {
             String year = date.substring(6);
             return new ArrayList<HttpGetQuery>(Arrays.asList(new HttpGetQuery("date", date), new HttpGetQuery("anno", year)));
