@@ -8,16 +8,8 @@ public class Parser {
     private static final HttpGetQuery[] base = new HttpGetQuery[] {
             new HttpGetQuery("form-type","corso"),
             new HttpGetQuery("list","0"),
-            new HttpGetQuery("periodo_didattico",""),
             new HttpGetQuery("visualizzazione_orario","cal"),
-            new HttpGetQuery("txtaa","2018/2019"), //periodo scolastico
-            new HttpGetQuery("txtcorso","Laurea in informatica (Corsi di laurea)"),
-            new HttpGetQuery("txtanno","2 anno - Unico"),
-            new HttpGetQuery("txtdocente",""),
-            new HttpGetQuery("txtattivita",""),
             new HttpGetQuery("_lang","it"),
-            new HttpGetQuery("docente",""),
-            new HttpGetQuery("attivita",""),
     };
 
     private ArrayList<HttpGetQuery> getQueries;
@@ -51,14 +43,12 @@ public class Parser {
         }
         if (!arguments.keySet().contains("corso")) {
             list.add(new HttpGetQuery("corso","420")); // default is informatica
-            list.add(new HttpGetQuery("ar_codes_","EC123053|EC123042|EC124717|EC124716|EC123048|EC124720"));
-            list.add(new HttpGetQuery("ar_select_","true|true|true|true|true|true"));
         } else {
             list.addAll(handleCourse(arguments.get("corso")));
         }
         if (!arguments.keySet().contains("anno")) {
-            list.add(new HttpGetQuery("anno2","999%7C2")); // second year
-            list.add(new HttpGetQuery("anno2_multi","999%7C2"));
+            list.add(new HttpGetQuery("anno2","999|2")); // second year
+            list.add(new HttpGetQuery("anno2_multi","999|2"));
         } else {
             list.addAll(handleYear(arguments.get("anno")));
         }
@@ -87,10 +77,7 @@ public class Parser {
         switch (course) {
             case "informatica":
                 return new ArrayList<HttpGetQuery>(Arrays.asList(
-                        new HttpGetQuery("corso","420"),
-                        new HttpGetQuery("ar_codes_","EC123053|EC123042|EC124717|EC124716|EC123048|EC124720"),
-                        new HttpGetQuery("ar_select_","true|true|true|true|true|true")));
-
+                        new HttpGetQuery("corso","420")));
             default:
                 throw new Error("Course '" + course + "' non supported. Try something different.");
         }
@@ -99,11 +86,11 @@ public class Parser {
     private ArrayList<HttpGetQuery> handleYear(String year) {
         switch(year) {
             case "1":
-                return new ArrayList<HttpGetQuery>(Arrays.asList(new HttpGetQuery("anno2", "999%7C1"), new HttpGetQuery("anno2_multi", "999%7C1")));
+                return new ArrayList<HttpGetQuery>(Arrays.asList(new HttpGetQuery("anno2", "999|1"), new HttpGetQuery("anno2_multi", "999|1")));
             case "2":
-                return new ArrayList<HttpGetQuery>(Arrays.asList(new HttpGetQuery("anno2", "999%7C2"), new HttpGetQuery("anno2_multi", "999%7C2")));
+                return new ArrayList<HttpGetQuery>(Arrays.asList(new HttpGetQuery("anno2", "999|2"), new HttpGetQuery("anno2_multi", "999|2")));
             case "3":
-                return new ArrayList<HttpGetQuery>(Arrays.asList(new HttpGetQuery("anno2", "999%7C3"), new HttpGetQuery("anno2_multiueries", "999%7C3")));
+                return new ArrayList<HttpGetQuery>(Arrays.asList(new HttpGetQuery("anno2", "999|3"), new HttpGetQuery("anno2_multi", "999|3")));
             default:
                 throw new Error ("Year option must be between 1 and 3");
         }
