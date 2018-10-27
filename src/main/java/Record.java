@@ -8,7 +8,7 @@ public class Record {
     }
 
     public String toString() {
-        String init = "";
+        String init = "\n";
         for (Day d : days) {
             MyDate date = d.getDate();
             String a = date.getDayofweek()+" " + date.getDay()+"/"+date.getMonth() + "\n";
