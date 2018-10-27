@@ -14,7 +14,7 @@ public class Record {
             String a = date.getDayofweek()+" " + date.getDay()+"/"+date.getMonth() + "\n";
             int l = a.length()-1;
             init +=a;
-            init+= "═══════════╗";
+            init+= "══════════════════════╗";
             init += "\n";
             for (Class c : d.getClasses()) {
                 init += c.toString();
