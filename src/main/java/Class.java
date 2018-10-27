@@ -45,6 +45,7 @@ public class Class {
             }
             return name.substring(0,l);
         }
+
     }
 
     public void setName(String name) {
