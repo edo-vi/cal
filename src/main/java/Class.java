@@ -14,6 +14,18 @@ public class Class {
         setEnd(time2);
     }
 
+    public String toString() {
+        String name = this.getCustomName();
+        int toFill = 21-name.length() + 1; // the difference plus one space
+        String init = "";
+        init += name;
+        for (int i = 0; i< toFill; i++) {
+            init+=" ";
+        }
+        init += "║ ";
+        init += this.getStartTime() + " - " + this.getEndTime() + "\n";
+        return init;
+    }
 
     public String getName() {
         return name;
@@ -21,12 +33,18 @@ public class Class {
 
     public String getCustomName() {
         String name = this.getName();
-        if (name.length()>20 && name.substring(0,17).equals("Programmazione ii")) {
+        if (name.length()>21 && name.substring(0,17).equals("Programmazione ii")) {
             return "Programmazione II";
         } else if (name.equals("Sistemi operativi teoria")) {
             return "Sistemi operativi";
+        } else {
+            //trim
+            int l = name.length();
+            if (21<l) {
+                l=21;
+            }
+            return name.substring(0,l);
         }
-        return name;
     }
 
     public void setName(String name) {
@@ -43,7 +61,6 @@ public class Class {
         cal.setTime(sta);
         return String.valueOf(cal.get(Calendar.HOUR_OF_DAY))+ ":" + String.valueOf(cal.get(Calendar.MINUTE));
     }
-
 
     public void setStart(Date start) {
         this.start = start;

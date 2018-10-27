@@ -11,9 +11,13 @@ public class Record {
         String init = "";
         for (Day d : days) {
             MyDate date = d.getDate();
-            init += date.getDayofweek()+" " + date.getDay()+"/"+date.getMonth() + "\n";
+            String a = date.getDayofweek()+" " + date.getDay()+"/"+date.getMonth() + "\n";
+            int l = a.length()-1;
+            init +=a;
+            init+= "═══════════╗";
+            init += "\n";
             for (Class c : d.getClasses()) {
-                init += c.getCustomName() + " " + c.getStartTime() + " - " + c.getEndTime() + "\n";
+                init += c.toString();
             }
             init+="\n";
         }
