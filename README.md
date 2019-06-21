@@ -1,6 +1,6 @@
 # calendar
 
-Simple CLI app that scrapes Univr/orari website to obtain and print the current class schedule.
+Simple CLI app that scrapes Univr/orari website to obtain and print the current Computer Science course class schedule.
 
 
 ### Installation
