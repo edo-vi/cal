@@ -2,7 +2,7 @@
 
 Simple CLI app that scrapes Univr/orari website to obtain and print the current Computer Science course class schedule.
 
-
+<b> Note: currently it doesn't work as the search parameters are hardcoded into the program and have to be changed in order to correctly get and print the current schedule</b>
 ### Installation
 //TODO
 
